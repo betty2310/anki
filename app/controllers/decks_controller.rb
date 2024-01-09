@@ -1,4 +1,5 @@
 class DecksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_deck, only: %i(show update destroy)
 
   # GET /decks
