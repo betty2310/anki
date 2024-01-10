@@ -1,4 +1,4 @@
-name: CI
+name: ANKI CI
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
           key: vendor-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             vendor-${{ runner.os }}-
-      - name: RuboCop Lint
+      - name: Rubocop Lint
         run: |
           bundle install --path vendor/bundle
           bundle exec rubocop --require rubocop/formatter/checkstyle_formatter --format RuboCop::Formatter::CheckstyleFormatter --no-color app/ lib/
