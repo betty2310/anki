@@ -10,11 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_09_174421) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_045936) do
+  create_table "cards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "front"
+    t.text "back"
+    t.bigint "user_id", null: false
+    t.bigint "deck_id", null: false
+    t.integer "status"
+    t.timestamp "next_review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_cards_on_deck_id"
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
   create_table "decks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_id"
+    t.bigint "user_id", null: false
+    t.index ["parent_id"], name: "index_decks_on_parent_id"
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "review_histories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "card_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_review_histories_on_card_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -27,9 +52,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_09_174421) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "jti", null: false
+    t.string "nickname", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
+    t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "decks"
+  add_foreign_key "cards", "users"
+  add_foreign_key "decks", "decks", column: "parent_id"
+  add_foreign_key "decks", "users"
+  add_foreign_key "review_histories", "cards"
 end
