@@ -24,7 +24,6 @@ jobs:
             vendor-${{ runner.os }}-
       - name: Bundle Install
         run: |
-          cp config/database.example.yml config/database.yml
           bundle install --path vendor/bundle
   test_rubocop:
     needs: build_prepare
