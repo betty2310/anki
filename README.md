@@ -1,3 +1,6 @@
-# ANKI
+### Docker
 
-# ANKI
+```
+$ cp .env.example .env
+$ docker-compose up
+```
