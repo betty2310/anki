@@ -51,12 +51,9 @@ class DecksController < ApplicationController
 
   def deck_with_children deck
     {
-      id: deck.id,
       name: deck.name,
-      created_at: deck.created_at,
-      updated_at: deck.updated_at,
-      user_id: deck.user_id,
       parent_id: deck.parent_id,
+      number_of_cards_today: deck.cards.learn_today.count,
       children: deck.children.map{|child| deck_with_children(child)}
     }
   end
