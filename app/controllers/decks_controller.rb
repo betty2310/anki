@@ -4,7 +4,12 @@ class DecksController < ApplicationController
 
   # GET /decks
   def index
-    @decks = current_user.decks.is_parent
+    if Rails.cache.exist?("decks/#{current_user.id}")
+      @decks = Rails.cache.read("decks/#{current_user.id}")
+    else
+      @decks = current_user.decks.is_parent
+      Rails.cache.write("decks/#{current_user.id}", @decks)
+    end
     render json: @decks.map{|deck| deck_with_children(deck)}
   end
 
@@ -54,7 +59,7 @@ class DecksController < ApplicationController
       name: deck.name,
       parent_id: deck.parent_id,
       number_of_cards_today: deck.cards.learn_today.count,
-      children: deck.children.map{|child| deck_with_children(child)}
+      children: deck.children.map { |child| deck_with_children(child) }
     }
   end
 end
