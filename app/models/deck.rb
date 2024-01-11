@@ -7,4 +7,6 @@ class Deck < ApplicationRecord
   has_many :cards, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
+
+  scope :is_parent, ->{where(parent_id: nil)}
 end
