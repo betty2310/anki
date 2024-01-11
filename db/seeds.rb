@@ -22,3 +22,7 @@ end
   Card.create!(front: Faker::Lorem.sentence(word_count: 3), back: Faker::Lorem.sentence(word_count: 3),
                user_id: rand(1..10), deck_id: rand(1..20))
 end
+
+100.times do
+  ReviewHistory.create!(card_id: rand(1..100), status: rand(0..3))
+end

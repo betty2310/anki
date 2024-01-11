@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: %i[show update destroy]
+  before_action :set_card, only: %i(show update destroy)
 
   # GET /cards
   # GET /cards.json
@@ -9,8 +9,7 @@ class CardsController < ApplicationController
 
   # GET /cards/1
   # GET /cards/1.json
-  def show
-  end
+  def show; end
 
   # POST /cards
   # POST /cards.json

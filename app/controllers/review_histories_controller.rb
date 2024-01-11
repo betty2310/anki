@@ -1,5 +1,5 @@
 class ReviewHistoriesController < ApplicationController
-  before_action :set_review_history, only: %i[show update destroy]
+  before_action :set_review_history, only: %i(show update destroy)
 
   # GET /review_histories
   # GET /review_histories.json
@@ -9,8 +9,7 @@ class ReviewHistoriesController < ApplicationController
 
   # GET /review_histories/1
   # GET /review_histories/1.json
-  def show
-  end
+  def show; end
 
   # POST /review_histories
   # POST /review_histories.json
