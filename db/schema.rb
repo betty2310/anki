@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_10_045936) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_11_025858) do
   create_table "cards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "front"
     t.text "back"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_10_045936) do
     t.datetime "updated_at", null: false
     t.bigint "parent_id"
     t.bigint "user_id", null: false
+    t.index ["name"], name: "index_decks_on_name", unique: true
     t.index ["parent_id"], name: "index_decks_on_parent_id"
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
