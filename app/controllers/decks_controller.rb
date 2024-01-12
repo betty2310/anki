@@ -56,10 +56,11 @@ class DecksController < ApplicationController
 
   def deck_with_children deck
     {
+      id: deck.id,
       name: deck.name,
       parent_id: deck.parent_id,
       number_of_cards_today: deck.cards.learn_today.count,
-      children: deck.children.map { |child| deck_with_children(child) }
+      children: deck.children.map{|child| deck_with_children(child)}
     }
   end
 end
