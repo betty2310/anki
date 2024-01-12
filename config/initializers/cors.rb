@@ -10,7 +10,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins "*" # This should be changed to the frontend URL when deployed
 
     resource "*",
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+             headers: :any,
+             expose: ['Authorization'],
+             methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
